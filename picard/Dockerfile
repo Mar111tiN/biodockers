@@ -15,5 +15,6 @@ WORKDIR $HOME
 RUN chmod 777 ${HOME}/work
 
 RUN conda install --quiet --yes -c bioconda \
+    'picard=2.23' \
     'sambamba' && \
     conda clean --all -f -y
