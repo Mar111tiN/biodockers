@@ -10,7 +10,7 @@ WORKDIR $HOME
 # install NGS tools
 RUN conda install --quiet --yes -c bioconda \
 		'mawk' \
-    'sambamba' && \
+    'samtools' && \
     conda clean --all -f -y && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
