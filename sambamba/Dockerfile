@@ -1,6 +1,8 @@
+ARG BASE_IMG='martin37szyska/jupyter-minimal'
+
 ARG TAG=3.8
 
-FROM martin37szyska/jupyter-minimal:$TAG
+FROM ${BASE_IMG}:$TAG
 
 ARG CURRENTUSER=$NB_USER
 USER root
