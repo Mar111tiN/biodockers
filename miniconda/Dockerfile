@@ -20,11 +20,13 @@ ENV HOME /home/$USER
 
 RUN mkdir $HOME
 
-ENV CONDA_VERSION=4.8.3 \
-    CONDA_MD5=d63adf39f2c220950a063e0529d4ff74
-    
+ENV CONDA_VERSION=4.12.0 \
+    CONDA_MD5=7843dd7d0a2c53b0df37ca8189672992 \
+    PYTHON_VERSION=py39 \
+    PLATFORM=x86_64
 
-RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${CONDA_VERSION}-Linux-x86_64.sh -O ~/miniconda.sh && \
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${PYTHON_VERSION}_${CONDA_VERSION}-Linux-${PLATFORM}.sh -O ~/miniconda.sh && \
     echo ${CONDA_MD5} ~/miniconda.sh | md5sum -c - && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \

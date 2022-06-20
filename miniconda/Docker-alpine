@@ -4,19 +4,20 @@ FROM frolvlad/alpine-glibc:alpine-${ALPINE_VERSION}
 
 ARG USER="martin"
 
-ENV CONDA_VERSION=4.8.3
-ENV CONDA_MD5=d63adf39f2c220950a063e0529d4ff74
+ENV CONDA_VERSION=4.12.0
+ENV CONDA_MD5=7843dd7d0a2c53b0df37ca8189672992
 ENV CONDA_DIR="/opt/conda"
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PATH="$CONDA_DIR/bin:$PATH"
-
+ENV PYTHON_VERSION=py39
+ENV PLATFORM=x86_64
 ENV HOME="/home/${USER}"
 # install minimal linux features
 RUN apk add --no-cache --virtual .build-dependencies ca-certificates wget && \
     apk add --no-cache bash
 
 # install dependencies, install Conda
-RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${PYTHON_VERSION}_${CONDA_VERSION}-Linux-${PLATFORM}.sh -O miniconda.sh && \
     echo "${CONDA_MD5}  miniconda.sh"  | md5sum -c && \
     mkdir -p /opt && \
     # install miniconda
