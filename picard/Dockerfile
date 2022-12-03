@@ -1,7 +1,5 @@
-FROM frolvlad/alpine-java:jdk8-cleaned
+FROM openjdk:11
 
-# download dependencies
-RUN apk add --no-cache git bash ca-certificates openssl unzip libstdc++
 
 # get picard 
 RUN git clone https://github.com/broadinstitute/picard.git && \
@@ -11,11 +9,9 @@ RUN git clone https://github.com/broadinstitute/picard.git && \
 RUN cd picard && \
     ./gradlew shadowJar
 
-FROM frolvlad/alpine-java:jre8.202.08-slim
+FROM openjdk:11
 
 WORKDIR /home
-
-RUN apk add --no-cache bash
 
 COPY --from=0 /picard/build/libs/picard.jar .
 
